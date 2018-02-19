@@ -49,6 +49,7 @@ extern "C" {
 
 #define Board_A4                    EK_TM4C123GXL_A4
 #define Board_A5                    EK_TM4C123GXL_A5
+#define Board_B2                    EK_TM4C123GXL_B2
 #define Board_B4                    EK_TM4C123GXL_B4
 #define Board_B5                    EK_TM4C123GXL_B5
 #define Board_F1                    EK_TM4C123GXL_F1

@@ -82,4 +82,17 @@ void Robot_EnableIMU(){
             imuConfiguration.Type          =ByteConfiguration;
             IMU_Sensor_Configure_Magnetometer(Robot_IMU,&imuConfiguration);
         }
+
+        //Limpíar interrupciones en cualquier lectura
+        //La interrupicion se genera cuando haya datos listos!
+        imuConfiguration.Address        = IMU_INT_PIN_CFG;
+        imuConfiguration.Configuration  = 0xB2;
+        imuConfiguration.Type    = ByteConfiguration;
+
+        IMU_Sensor_Configure(Robot_IMU,&imuConfiguration);
+
+        //Activar  interrupciones
+        imuConfiguration.Address = IMU_INT_ENABLE;
+        imuConfiguration.Configuration = 0x01;
+        IMU_Sensor_Configure(Robot_IMU,&imuConfiguration);
 }

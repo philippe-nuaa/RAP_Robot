@@ -9,7 +9,7 @@
 #define UTILS_CONTROL_CONTROL_H_
 
 #ifndef _PID_DATA_TYPE_
-    #define _PID_DATA_TYPE_ Encoder_vel
+    #define _PID_DATA_TYPE_ volatile Encoder_vel
 #endif
 #include "PID.h"
 

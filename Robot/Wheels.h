@@ -18,8 +18,10 @@
 #define Default_R_I     0.2
 #define Default_R_D     0.8
 
-typedef float rad;
-
+#ifndef RAD_DEF
+#define RAD_DEF
+    typedef float rad;
+#endif
 extern void Wheels_init(void);
 
 extern void Wheels_start(void);

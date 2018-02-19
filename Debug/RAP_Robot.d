@@ -215,6 +215,12 @@ RAP_Robot.obj: /home/josepablocb/Workspace/VoltaRobotics/Tests/RAP_Robot/Robot/R
 RAP_Robot.obj: /home/josepablocb/Workspace/VoltaRobotics/Tests/RAP_Robot/Robot/Control/Control.h
 RAP_Robot.obj: /home/josepablocb/Workspace/VoltaRobotics/Tests/RAP_Robot/Robot/Control/PID.h
 RAP_Robot.obj: /home/josepablocb/Workspace/VoltaRobotics/Tests/RAP_Robot/Robot/Wheels.h
+RAP_Robot.obj: /home/josepablocb/Workspace/VoltaRobotics/Tests/RAP_Robot/Robot/IMUSensor.h
+RAP_Robot.obj: /home/josepablocb/ti/ccsv7/tools/compiler/ti-cgt-arm_18.1.0.LTS/include/math.h
+RAP_Robot.obj: /home/josepablocb/ti/ccsv7/tools/compiler/ti-cgt-arm_18.1.0.LTS/include/_ti_config.h
+RAP_Robot.obj: /home/josepablocb/ti/ccsv7/tools/compiler/ti-cgt-arm_18.1.0.LTS/include/linkage.h
+RAP_Robot.obj: /home/josepablocb/ti/ccsv7/tools/compiler/ti-cgt-arm_18.1.0.LTS/include/_defs.h
+RAP_Robot.obj: /home/josepablocb/ti/ccsv7/tools/compiler/ti-cgt-arm_18.1.0.LTS/include/machine/_limits.h
 
 ../RAP_Robot.c: 
 /home/josepablocb/Workspace/VoltaRobotics/Tests/RAP_Robot/Robot/Robot.h: 
@@ -431,3 +437,9 @@ RAP_Robot.obj: /home/josepablocb/Workspace/VoltaRobotics/Tests/RAP_Robot/Robot/W
 /home/josepablocb/Workspace/VoltaRobotics/Tests/RAP_Robot/Robot/Control/Control.h: 
 /home/josepablocb/Workspace/VoltaRobotics/Tests/RAP_Robot/Robot/Control/PID.h: 
 /home/josepablocb/Workspace/VoltaRobotics/Tests/RAP_Robot/Robot/Wheels.h: 
+/home/josepablocb/Workspace/VoltaRobotics/Tests/RAP_Robot/Robot/IMUSensor.h: 
+/home/josepablocb/ti/ccsv7/tools/compiler/ti-cgt-arm_18.1.0.LTS/include/math.h: 
+/home/josepablocb/ti/ccsv7/tools/compiler/ti-cgt-arm_18.1.0.LTS/include/_ti_config.h: 
+/home/josepablocb/ti/ccsv7/tools/compiler/ti-cgt-arm_18.1.0.LTS/include/linkage.h: 
+/home/josepablocb/ti/ccsv7/tools/compiler/ti-cgt-arm_18.1.0.LTS/include/_defs.h: 
+/home/josepablocb/ti/ccsv7/tools/compiler/ti-cgt-arm_18.1.0.LTS/include/machine/_limits.h: 

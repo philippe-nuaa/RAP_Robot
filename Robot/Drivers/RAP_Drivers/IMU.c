@@ -334,7 +334,6 @@ void IMU_Sleep(IMU_Handle imu_handle){
 //    configuration.Type              = Configuration;
 //    configuration.Configuration     = 0x20C0;//Cycle - 1
 //    IMU_Sensor_Configure(imu,&configuration);
-
 }
 //         * @brief  Registrar evento de interrupción
 void IMU_setCallback(IMU_Handle imu_handle,IMU_CallbackEvent CallbackEvent,uint32_t PIN){

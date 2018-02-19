@@ -8,6 +8,12 @@
 #ifndef ROBOT_DRIVERS_DRIVERS_H_
 #define ROBOT_DRIVERS_DRIVERS_H_
 
+#ifndef ENCODER_CPR
+    #define ENCODER_CPR               2797
+#endif
+#ifndef CPU_FREQ
+    #define CPU_FREQ              80000000
+#endif
 #ifndef ENCODER_PERIOD
     #define ENCODER_PERIOD         4000000
 #endif

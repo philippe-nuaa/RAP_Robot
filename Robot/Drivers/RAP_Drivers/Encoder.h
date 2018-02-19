@@ -119,9 +119,13 @@
 //#include "inc/hw_qei.h"
 
 //#define QEI_FUNC    6
-#define ENCODER_CPR             2797
+#ifndef     ENCODER_CPR
+    #define ENCODER_CPR             2797
+#endif
 //RTOS cpu freq
-#define CPU_FREQ                80000000
+#ifndef     CPU_FREQ
+    #define CPU_FREQ                80000000
+#endif
 //ENCODER SAMPLE PERIOD - Number of clock ticks over which to measure the velocity
 #ifndef     ENCODER_PERIOD
     #define ENCODER_PERIOD          4000000

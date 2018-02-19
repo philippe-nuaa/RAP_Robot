@@ -103,6 +103,7 @@ GPIO_PinConfig gpioPinConfigs[] = {
 /* INPUTS */
        GPIOTiva_PA_4 | GPIO_CFG_INPUT | GPIO_CFG_IN_INT_NONE,                          //<- MOTOR DRIVER MR_SF
        GPIOTiva_PA_5 | GPIO_CFG_INPUT | GPIO_CFG_IN_INT_NONE,                          //<- MOTOR DRIVER ML_SF
+       GPIOTiva_PB_2 | GPIO_CFG_IN_PU | GPIO_CFG_IN_INT_FALLING,//For IMU Int  - GPIO_CFG_IN_INT_FALLING,
 /* OUTPUTS */
        GPIOTiva_PB_4 | GPIO_CFG_OUT_STD | GPIO_CFG_OUT_STR_HIGH | GPIO_CFG_OUT_LOW,    //<- MOTOR DRIVER MRD1
        GPIOTiva_PB_5 | GPIO_CFG_OUT_STD | GPIO_CFG_OUT_STR_HIGH | GPIO_CFG_OUT_LOW,     //<- MOTOR DRIVER EN
@@ -118,7 +119,8 @@ GPIO_PinConfig gpioPinConfigs[] = {
  */
 GPIO_CallbackFxn gpioCallbackFunctions[] = {
     NULL,  /* EK_TM4C123GXL_PA_4 */
-    NULL   /* EK_TM4C123GXL_PA_5 */
+    NULL,  /* EK_TM4C123GXL_PA_5 */
+    NULL   /* EK_TM4C123GXL_PB_2 */
 };
 
 /* The device-specific GPIO_config structure */

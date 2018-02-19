@@ -31,27 +31,28 @@
     #define RobotLogReadFloat() UART_readFloat(Robot_uart)
 
 
-    UART_Handle         Robot_uart;
+    UART_Handle                 Robot_uart;
 
 //
 //  Motor Driver
 //
-    MotorDriver_state   Robot_MotorState;
-    MotorDriver_Handle  Robot_Motor;
+    MotorDriver_state           Robot_MotorState;
+    MotorDriver_Handle          Robot_Motor;
 //
 //  Encoder Driver
 //
     #define Robot_Left_Encoder  Board_QEI0
     #define Robot_Right_Encoder Board_QEI1
 
-    Encoder_state       Robot_EncoderL,Robot_EncoderR;
-    Encoder_Handle      Robot_ENCL,Robot_ENCR;
+    Encoder_state               Robot_EncoderL,Robot_EncoderR;
+    Encoder_Handle              Robot_ENCL,Robot_ENCR;
 //
 //  IMU Driver
 //
-    #define Robot_I2C   Board_I2C1
-    IMU_State       Robot_IMUstate;
-    IMU_Handle      Robot_IMU;
+    #define Robot_I2C           Board_I2C1
+    #define Robot_IMU_INT_PIN   Board_B2
+    IMU_State                   Robot_IMUstate;
+    IMU_Handle                  Robot_IMU;
 //
 //  Prototipos
 //

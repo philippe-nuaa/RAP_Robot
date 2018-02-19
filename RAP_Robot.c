@@ -1,5 +1,7 @@
 #include <Robot/Robot.h>
 #include <Robot/Wheels.h>
+#include <Robot/IMUSensor.h>
+
 
 #define TASKSTACKSIZE   512
 
@@ -28,24 +30,22 @@ int main(void){
 }
 
 Void Task0(UArg arg0,UArg arg1){
-    rad speed=0.0;
+//    rad         speed=0.0;
+    RobotLog("Intentando activar el IMU\n");
     Robot_EnableIMU();
-    RobotLog("\nWrite the Left speed\n");
-        speed = RobotLogReadFloat();
-    RobotLogFloat(speed);
-        Left_Wheel_Speed(speed);
+    IMUSensor_init();
+    IMUSensor_Enable();
 
-    RobotLog("\nWrite the Right speed\n");
-        speed = RobotLogReadFloat();
-    RobotLogFloat(speed);
-        Right_Wheel_Speed(speed);
-
-    RobotLog(",\n");
-
+    Left_Wheel_Speed(0.0);
+    Right_Wheel_Speed(0.0);
     Wheels_start();
 TASK0_LOOP:
-        RobotLogFloat( Right_Wheel_readSpeed() );
-        RobotLogFloat( Left_Wheel_readSpeed() );
+        RobotLogFloat(IMUSensor_getRoll());
+        RobotLog(" , ");
+        RobotLogFloat(IMUSensor_getPitch());
+        RobotLog(" , ");
+        RobotLogFloat(IMUSensor_getYaw());
+        RobotLogCh('\n');
         Task_sleep(100);
     goto TASK0_LOOP;
 }

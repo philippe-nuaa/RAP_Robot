@@ -84,7 +84,7 @@ d_buffer = d_buffer%1000;
 UART_putch(uart_handle,UART_intToHexChar((d_buffer/100)%10));
 UART_putch(uart_handle,UART_intToHexChar((d_buffer/10)%10));
 UART_putch(uart_handle,UART_intToHexChar((d_buffer)%10));
-UART_putch(uart_handle,'\n');
+//UART_putch(uart_handle,'\n');
 }
 
 //
