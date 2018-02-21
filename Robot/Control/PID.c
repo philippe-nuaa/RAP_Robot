@@ -16,7 +16,6 @@ PID_Handle newPIDComputer(pid_data* input,pid_data* output,PID_buffer* pid_buffe
     pid_buffer->Ki  = 0;
     pid_buffer->Kd  = 0;
     pid_buffer->set_point = 0;
-    pid_buffer->state     = 0x00;
     pid_buffer->min = 0;
     pid_buffer->max = 255;
 

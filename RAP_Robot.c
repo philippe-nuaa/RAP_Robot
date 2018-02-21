@@ -1,6 +1,5 @@
 #include <Robot/Robot.h>
-#include <Robot/Wheels.h>
-#include <Robot/IMUSensor.h>
+#include <Robot/Control/Balance.h>
 
 
 #define TASKSTACKSIZE   512
@@ -14,7 +13,6 @@ int main(void){
     Task_Params         taskParams;
 
     Robot_init();
-    Wheels_init();
 
     //
     //    Crear una tarea comun
@@ -30,22 +28,23 @@ int main(void){
 }
 
 Void Task0(UArg arg0,UArg arg1){
-//    rad         speed=0.0;
-    RobotLog("Intentando activar el IMU\n");
-    Robot_EnableIMU();
-    IMUSensor_init();
-    IMUSensor_Enable();
-
-    Left_Wheel_Speed(0.0);
-    Right_Wheel_Speed(0.0);
-    Wheels_start();
+    float buffer = 0.0;
+    Balance_Init();
+    Balance_calibrate();
+    Balance_start();
 TASK0_LOOP:
-        RobotLogFloat(IMUSensor_getRoll());
-        RobotLog(" , ");
-        RobotLogFloat(IMUSensor_getPitch());
-        RobotLog(" , ");
-        RobotLogFloat(IMUSensor_getYaw());
-        RobotLogCh('\n');
+        RobotLog("\nBalance Kp : ");
+            buffer = RobotLogReadFloat();
+        Balance_setKp(buffer);
+
+        RobotLog("\nBalance Ki : ");
+            buffer = RobotLogReadFloat();
+        Balance_setKi(buffer);
+
+        RobotLog("\nBalance Kd : ");
+            buffer = RobotLogReadFloat();
+        Balance_setKd(buffer);
+
         Task_sleep(100);
     goto TASK0_LOOP;
 }

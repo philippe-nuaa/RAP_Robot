@@ -86,7 +86,7 @@ void Robot_EnableIMU(){
         //Limpíar interrupciones en cualquier lectura
         //La interrupicion se genera cuando haya datos listos!
         imuConfiguration.Address        = IMU_INT_PIN_CFG;
-        imuConfiguration.Configuration  = 0xB2;
+        imuConfiguration.Configuration  = 0xD2;//0xB2;
         imuConfiguration.Type    = ByteConfiguration;
 
         IMU_Sensor_Configure(Robot_IMU,&imuConfiguration);

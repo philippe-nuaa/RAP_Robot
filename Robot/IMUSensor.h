@@ -26,8 +26,6 @@ extern rad IMUSensor_getRoll(void);
 extern rad IMUSensor_getPitch(void);
 extern rad IMUSensor_getYaw(void);
 
-extern IMU_axis IMUSensor_getTilt(void);
-
 extern rad IMUSensor_getRacc(void);
 extern rad IMUSensor_getRgyr(void);
 

@@ -5,7 +5,6 @@
     #define _PID_DATA_TYPE_ float
 #endif
     typedef _PID_DATA_TYPE_ pid_data;
-	typedef unsigned char pid_flags;
 
 	//
 	//	Estructura privada para PID
@@ -27,7 +26,6 @@
 		pid_data 		Kp,Ki,Kd;//Constantes para calcular PID
 		pid_data		min;
 		pid_data		max;
-		pid_flags		state;//Bits de estado del calculo
 		pid_data		set_point;
 	}PID_buffer;
 	
