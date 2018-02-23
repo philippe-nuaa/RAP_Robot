@@ -28,6 +28,7 @@
     #define RobotLogFloat(_FT_) {UART_putFloat(Robot_uart , _FT_ );}
 
     //Input Macros
+    #define RobotLogReadChar()  UART_readChar(Robot_uart);
     #define RobotLogReadFloat() UART_readFloat(Robot_uart)
 
 

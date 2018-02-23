@@ -63,12 +63,12 @@ void Wheels_init(){
     //   Crear una tarea periodica
     //
     Clock_Params_init(&clkParams);
-    clkParams.period = 4; //4 period of miliseconds
+    clkParams.period = _Wheels_CTL_PERIOD_; //4 period of miliseconds
     clkParams.startFlag = FALSE;//Triggered!
 
     /* Construct a periodic Clock Instance with period = 4 system time units */
     Clock_construct(&WheelsControlStruct, (Clock_FuncPtr)__WheelsControl__,
-                    4, &clkParams);
+                    1, &clkParams);
 
     WheelsControl_Handle = Clock_handle(&WheelsControlStruct);
 }
@@ -82,10 +82,10 @@ void Wheels_stop(){
 }
 
 void Right_Wheel_Speed(rad speed){
-    pid_left->set_point = speed;
+    pid_right->set_point = speed;
 }
 void Left_Wheel_Speed(rad speed){
-    pid_right->set_point = speed;
+    pid_left->set_point = speed;
 }
 rad  Right_Wheel_readSpeed(){
     return Encoder_ReadVelocity(Robot_ENCR);
@@ -93,3 +93,24 @@ rad  Right_Wheel_readSpeed(){
 rad  Left_Wheel_readSpeed(){
     return Encoder_ReadVelocity(Robot_ENCL);
 }
+
+//
+//void Left_setKp(rad p){
+//    pid_left->Kp = p;
+//}
+//void Left_setKi(rad i){
+//    pid_left->Ki = i;
+//}
+//void Left_setKd(rad d){
+//    pid_left->Kd = d;
+//}
+//
+//void Right_setKp(rad p){
+//    pid_right->Kp = p;
+//}
+//void Right_setKi(rad i){
+//    pid_right->Ki = i;
+//}
+//void Right_setKd(rad d){
+//    pid_right->Kd = d;
+//}

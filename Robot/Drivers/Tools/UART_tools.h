@@ -35,4 +35,9 @@
     //Recupera desde el puerto serie un numero en formato flotante
     //
     extern float UART_readFloat(UART_Handle);
+    //
+    //Recupera desde el puerto serie un caracter ascii
+    //
+    extern char UART_readChar(UART_Handle);
+
 #endif

@@ -8,7 +8,7 @@ void UART_puts(UART_Handle uart_handle,const char* msj){
         UART_write(uart_handle,msj,1);
         *msj++;
     }
-    UART_write(uart_handle,'\n',1);
+    UART_putch(uart_handle,'\n');
 }
 //
 //Envia un caracter por el puerto serial
@@ -119,13 +119,13 @@ float UART_readFloat(UART_Handle uart_handle){
 
     UART_read(uart_handle,&rxBuffer,1);
     if(rxBuffer == '-'){flag=1;}
-    while(rxBuffer!='\n'){
+    while(1){
         if(rxBuffer == '.'){break;}
             bufferInt *=10;
             bufferInt += UART_CharToInt(rxBuffer);
         UART_read(uart_handle,&rxBuffer,1);
     }
-    while(rxBuffer!='\n'){
+    while(1){
         UART_read(uart_handle,&rxBuffer,1);
         if(rxBuffer == ';'){break;}
             bufferDec *=10;
@@ -137,4 +137,9 @@ float UART_readFloat(UART_Handle uart_handle){
         return result*-1;
     }
     return result;
+}
+char UART_readChar(UART_Handle uart_handle){
+    char    rxBuffer=' ';
+    UART_read(uart_handle,&rxBuffer,1);
+    return rxBuffer;
 }
