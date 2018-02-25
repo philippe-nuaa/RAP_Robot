@@ -28,6 +28,16 @@
     #define Default_R_P     2.0
     #define Default_R_I     0.1
     #define Default_R_D     0.8
+//
+//  Demasiado agresivo!
+//
+//    #define Default_L_P     9.0//2.0
+//    #define Default_L_I     0.15
+//    #define Default_L_D     0.8
+//
+//    #define Default_R_P     9.8//2.0
+//    #define Default_R_I     0.1
+//    #define Default_R_D     0.8
 #endif
 
 #ifndef RAD_DEF
@@ -49,11 +59,11 @@ extern void Left_Wheel_Speed(rad);
 extern rad  Right_Wheel_readSpeed();
 extern rad  Left_Wheel_readSpeed();
 
-//extern void Left_setKp(rad);
-//extern void Left_setKi(rad);
-//extern void Left_setKd(rad);
-//
-//extern void Right_setKp(rad);
-//extern void Right_setKi(rad);
-//extern void Right_setKd(rad);
+extern void Left_setKp(rad);
+extern void Left_setKi(rad);
+extern void Left_setKd(rad);
+
+extern void Right_setKp(rad);
+extern void Right_setKi(rad);
+extern void Right_setKd(rad);
 #endif /* ROBOT_DRIVERS_WHEELS_H_ */

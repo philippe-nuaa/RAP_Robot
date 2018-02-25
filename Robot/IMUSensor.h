@@ -27,6 +27,5 @@ extern rad IMUSensor_getPitch(void);
 extern rad IMUSensor_getYaw(void);
 
 extern rad IMUSensor_getRacc(void);
-extern rad IMUSensor_getRgyr(void);
 
 #endif

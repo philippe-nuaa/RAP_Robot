@@ -20,10 +20,6 @@ float       Roll;
 float       Pitch;
 float       Yaw;
 
-IMU_axis    IMU_LastGyr;
-IMU_axis    IMU_Gyr;
-float       Rgyr;
-
 
 void IMUInterruptFx(unsigned int Index){
     Semaphore_post(IMUsemHandle);
@@ -46,19 +42,6 @@ void Filter(){
         IMU_LastAccel.Y_axis = IMU_Accel.Y_axis;
         IMU_LastAccel.Z_axis = IMU_Accel.Z_axis;
     }
-    if(IMU_Gyr.isValid){
-        IMU_Gyr.X_axis += IMU_LastGyr.X_axis;
-        IMU_Gyr.Y_axis += IMU_LastGyr.Y_axis;
-        IMU_Gyr.Z_axis += IMU_LastGyr.Z_axis;
-
-        IMU_Gyr.X_axis /= 2;
-        IMU_Gyr.Y_axis /= 2;
-        IMU_Gyr.Z_axis /= 2;
-
-        IMU_LastGyr.X_axis = IMU_Gyr.X_axis;
-        IMU_LastGyr.Y_axis = IMU_Gyr.Y_axis;
-        IMU_LastGyr.Z_axis = IMU_Gyr.Z_axis;
-    }
 }
 
 Void IMUTask(UArg arg0, UArg arg1){
@@ -67,7 +50,6 @@ IMUTASK_LOOP:
     Semaphore_pend(IMUsemHandle, BIOS_WAIT_FOREVER);
         //Actualizar buffer
         IMU_Accel = IMU_ReadAccelerometer(Robot_IMU);
-//        IMU_Gyr   = IMU_ReadGyroscope(Robot_IMU);
         Filter();
 //Unicamente si son validos los datos actualizamos
         if(IMU_Accel.isValid){
@@ -76,8 +58,6 @@ IMUTASK_LOOP:
             Pitch = acosf(IMU_Accel.X_axis/Racc);
             Yaw   = acosf(IMU_Accel.Z_axis/Racc);
         }
-//        if(IMU_Gyr.isValid)
-//            Rgyr = powf(powf(IMU_Gyr.X_axis,2)+powf(IMU_Gyr.Y_axis,2)+powf(IMU_Gyr.Z_axis,2),0.5);
     goto IMUTASK_LOOP;
 }
 
@@ -111,16 +91,6 @@ void IMUSensor_init(){
     IMU_LastAccel.Y_axis = 0.0;
     IMU_LastAccel.Z_axis = 0.0;
     IMU_LastAccel.isValid = true;
-
-
-    IMU_Gyr.X_axis = 0.0;
-    IMU_Gyr.Y_axis = 0.0;
-    IMU_Gyr.Z_axis = 0.0;
-    IMU_Gyr.isValid = false;
-    IMU_LastGyr.X_axis = 0.0;
-    IMU_LastGyr.Y_axis = 0.0;
-    IMU_LastGyr.Z_axis = 0.0;
-    IMU_LastGyr.isValid = true;
 }
 void IMUSensor_Enable(){
     IMU_EnableEvents(Robot_IMU);
@@ -149,8 +119,4 @@ rad IMUSensor_getYaw(){
 
 rad IMUSensor_getRacc(){
     return Racc;
-}
-
-rad IMUSensor_getRgyr(){
-    return Rgyr;
 }

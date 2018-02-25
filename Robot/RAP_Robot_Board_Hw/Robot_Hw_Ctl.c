@@ -82,6 +82,19 @@ void Robot_EnableIMU(){
             imuConfiguration.Type          =ByteConfiguration;
             IMU_Sensor_Configure_Magnetometer(Robot_IMU,&imuConfiguration);
         }
+        //
+        //  Configurar Filtro pasa bajas para el acelerometro
+        //
+
+        imuConfiguration.Address        = IMU_ACCEL_CONFIG;
+        imuConfiguration.Configuration  = 0b00011000;//+/- 16g
+        imuConfiguration.Type           = ByteConfiguration;
+        IMU_Sensor_Configure(Robot_IMU,&imuConfiguration);
+
+        imuConfiguration.Address        = IMU_ACCEL_CONFIG2;
+        imuConfiguration.Configuration  = 0b0001110;//DLPF 32.48 - 300uG/rtHz
+        imuConfiguration.Type           = ByteConfiguration;
+        IMU_Sensor_Configure(Robot_IMU,&imuConfiguration);
 
         //Limpíar interrupciones en cualquier lectura
         //La interrupicion se genera cuando haya datos listos!

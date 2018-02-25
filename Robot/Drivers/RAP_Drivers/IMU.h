@@ -212,7 +212,7 @@
     //*****************************************************************************
     #define CONVERT_TO_TESLA        0.00000015  // for 16 bit resolution
     #define IMU_Gy_Fact             0           //
-    #define IMU_Ac_Fact             0           //
+    #define IMU_Ac_Fact             3           //
     // Inicializacion del driver, Generic API Macro.
     #define IMU_READ_FAIL          0x7FFF
     #define IMU_init()             Board_initI2C();

@@ -37,6 +37,6 @@
 //
 #include "Drivers/Drivers.h"    //Controlador de motores, IMU y Encoder
 #include "Drivers/Tools.h"      //Logs y utilidades de depuración
-#include "Control/Control.h"    //Matematicas y control
+#include "Control/Control.h"    //Control
 
 #endif

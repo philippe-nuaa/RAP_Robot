@@ -8,7 +8,7 @@ void UART_puts(UART_Handle uart_handle,const char* msj){
         UART_write(uart_handle,msj,1);
         *msj++;
     }
-    UART_putch(uart_handle,'\n');
+//    UART_putch(uart_handle,'\n');
 }
 //
 //Envia un caracter por el puerto serial

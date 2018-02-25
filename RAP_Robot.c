@@ -1,4 +1,5 @@
 #include <Robot/Robot.h>
+//#include <Robot/IMUSensor.h>
 #include <Robot/Control/Balance.h>
 //#include <Robot/Wheels.h>
 
@@ -27,12 +28,38 @@ int main(void){
 }
 
 Void Task0(UArg arg0,UArg arg1){
+//    unsigned char i=0;
+//    Wheels_init();
+//    Wheels_start();
+//    Left_Wheel_Speed(2.5);
+//    Right_Wheel_Speed(2.5);
+//
+//TASK0_LOOP:
+//        i++;
+//        RobotLogFloat(Left_Wheel_readSpeed());
+//        RobotLog(" , ");
+//        RobotLogFloat(Right_Wheel_readSpeed());
+//        RobotLogCh('\n');
+//    Task_sleep(100);
+//    goto TASK0_LOOP;
+
+
+//    Robot_EnableIMU();
+//    IMUSensor_init();
+//    IMUSensor_Enable();
+//TASK0_LOOP:
+//        RobotLogHex(IMU_ReadRegister(Robot_IMU,IMU_ACCEL_CONFIG,WordConfiguration));
+//        RobotLog(" , ");
+//        RobotLogFloat(IMUSensor_getRoll());
+//        RobotLog("\n");
+//        Task_sleep(100);
+//    goto TASK0_LOOP;
+
     float buffer = 0.0;
     char cmd=' ';
     Balance_Init();
     Balance_calibrate();
     Balance_start();
-    Wheels_start();
 TASK0_LOOP:
     RobotLog("\nEsperando comando: ");
     cmd = RobotLogReadChar();
@@ -65,6 +92,6 @@ TASK0_LOOP:
         default:
             RobotLog("\nComando desconocido!\n");
     }
-//        Task_sleep(100);
+        Task_sleep(100);
     goto TASK0_LOOP;
 }

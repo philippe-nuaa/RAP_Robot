@@ -94,23 +94,23 @@ rad  Left_Wheel_readSpeed(){
     return Encoder_ReadVelocity(Robot_ENCL);
 }
 
-//
-//void Left_setKp(rad p){
-//    pid_left->Kp = p;
-//}
-//void Left_setKi(rad i){
-//    pid_left->Ki = i;
-//}
-//void Left_setKd(rad d){
-//    pid_left->Kd = d;
-//}
-//
-//void Right_setKp(rad p){
-//    pid_right->Kp = p;
-//}
-//void Right_setKi(rad i){
-//    pid_right->Ki = i;
-//}
-//void Right_setKd(rad d){
-//    pid_right->Kd = d;
-//}
+
+void Left_setKp(rad p){
+    pid_left->Kp = p;
+}
+void Left_setKi(rad i){
+    pid_left->Ki = i;
+}
+void Left_setKd(rad d){
+    pid_left->Kd = d;
+}
+
+void Right_setKp(rad p){
+    pid_right->Kp = p;
+}
+void Right_setKi(rad i){
+    pid_right->Ki = i;
+}
+void Right_setKd(rad d){
+    pid_right->Kd = d;
+}

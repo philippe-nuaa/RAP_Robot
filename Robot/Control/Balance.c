@@ -19,7 +19,7 @@ Clock_Handle        BalanceControl_Handle;
 
 
 Void __Balance_Control__(UArg arg){
-    input = IMUSensor_getRoll()*10;
+    input = IMUSensor_getRoll();
     PID_Compute(balance_pid);
 
     Left_Wheel_Speed(-1*output);
@@ -72,12 +72,12 @@ void Balance_Init(){
 
     /* Construct a periodic Clock Instance with period = 4 system time units */
     Clock_construct(&BalanceControlStruct, (Clock_FuncPtr)__Balance_Control__,
-                    4, &clkParams);
+                    1, &clkParams);
 
     BalanceControl_Handle = Clock_handle(&BalanceControlStruct);
 }
 
-#define MAX_CALIB_ITER  10
+#define MAX_CALIB_ITER  100
 //
 //  Calibrar angulo de balance
 //
@@ -86,10 +86,10 @@ void Balance_calibrate(){
     unsigned int i=0;
     rad buffer=0.0;
     for(i=0;i<MAX_CALIB_ITER;i++){
-        Task_sleep(2);
-        buffer += IMUSensor_getRoll();
+        Task_sleep(5);
+        buffer += IMUSensor_getRoll()/MAX_CALIB_ITER;
     }
-    balance_pid->set_point = buffer/MAX_CALIB_ITER*10;
+    balance_pid->set_point = buffer;
 }
 
 //
@@ -98,6 +98,7 @@ void Balance_calibrate(){
 //  este sistema esté activo
 //
 void Balance_start(){
+    Wheels_start();
     Clock_start(BalanceControl_Handle);
 }
 //
