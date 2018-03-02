@@ -1,6 +1,7 @@
-#include <Robot/Robot.h>
+#include <Robot/Robot.h>// Incluye todos los drivers del hardware
+
 //#include <Robot/IMUSensor.h>
-#include <Robot/Control/Balance.h>
+//#include <Robot/Control/Balance.h>
 //#include <Robot/Wheels.h>
 #include  <stdbool.h>
 
@@ -9,20 +10,10 @@
 Task_Struct     task0Struct;
 Char task0Stack[TASKSTACKSIZE];
 
-Task_Struct     task1Struct;
-Char task1Stack[TASKSTACKSIZE];
-
-//Clock_Struct    Clock0Struct;
-//Clock_Handle    Clock0_Handle;
-
 Void Task0(UArg, UArg);
-
-bool flag;
 
 int main(void){
     Task_Params         taskParams;
-
-    flag = false;
 
     Robot_init();
     //
@@ -127,38 +118,65 @@ Void Task0(UArg arg0,UArg arg1){
 //        Task_sleep(100);
 //    goto TASK0_LOOP;
 
-    float buffer = 0.0;
-    char cmd=' ';
-    Balance_Init();
-    Balance_calibrate();
-    Balance_start();
+//    float buffer = 0.0;
+//    char cmd=' ';
+//    Balance_Init();
+//    Balance_calibrate();
+//    Balance_start();
+//TASK0_LOOP:
+//    RobotLog("\nEsperando comando: ");
+//    cmd = RobotLogReadChar();
+//    switch(cmd){
+//        case 'k':
+//            RobotLog("\nCalibrando equilibrio\n");
+//            Balance_calibrate();
+//            break;
+//        case 'g':
+//            RobotLog("\nComenzando control de equilibrio\n");
+//            Balance_start();
+//            break;
+//        case 's':
+//            RobotLog("\nDeteniendo control de equilibrio\n");
+//            Balance_stop();
+//            break;
+//        case 't':
+//            RobotLog("\nBalance Acc Kp : ");
+//                buffer = RobotLogReadFloat();
+//                Balance_setAccKp(buffer);
+//            RobotLog("\nBalance Gyr Kp : ");
+//                buffer = RobotLogReadFloat();
+//                Balance_setGyrKp(buffer);
+//            break;
+//        default:
+//            RobotLog("\nComando desconocido!\n");
+//    }
+//        Task_sleep(100);
+//    goto TASK0_LOOP;
+
+float buffer=0.0;
+char cmd=' ';
+    MotorDriver_Start(Robot_Motor);
 TASK0_LOOP:
     RobotLog("\nEsperando comando: ");
     cmd = RobotLogReadChar();
     switch(cmd){
-        case 'k':
-            RobotLog("\nCalibrando equilibrio\n");
-            Balance_calibrate();
+        case 's':
+            MotorDriver_Stop(Robot_Motor);
             break;
         case 'g':
-            RobotLog("\nComenzando control de equilibrio\n");
-            Balance_start();
-            break;
-        case 's':
-            RobotLog("\nDeteniendo control de equilibrio\n");
-            Balance_stop();
+            MotorDriver_Start(Robot_Motor);
             break;
         case 't':
-            RobotLog("\nBalance Acc Kp : ");
+            RobotLog("\nLeft Speed : ");
                 buffer = RobotLogReadFloat();
-                Balance_setAccKp(buffer);
-            RobotLog("\nBalance Gyr Kp : ");
+                MotorDriver_Left(Robot_Motor,buffer);
+            RobotLog("\nRight Speed : ");
                 buffer = RobotLogReadFloat();
-                Balance_setGyrKp(buffer);
+                MotorDriver_Right(Robot_Motor,buffer);
             break;
         default:
             RobotLog("\nComando desconocido!\n");
     }
-        Task_sleep(100);
+    Task_sleep(100);
     goto TASK0_LOOP;
 }

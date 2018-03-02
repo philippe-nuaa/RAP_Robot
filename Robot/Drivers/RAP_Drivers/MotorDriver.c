@@ -103,9 +103,10 @@
     * */
 
         PWM_Params_init(&pwm_params);
-        pwm_params.period = params->PWM_period;
+        pwm_params.period   = params->PWM_period;
+        pwm_params.dutyMode = PWM_DUTY_SCALAR;//0 - 100 = 0 - 65535
 
-        state->PWM_fact = ((float)params->PWM_period)/100;
+        state->PWM_fact = MotorDriver_PWMSCALAR_100/100;
 
         pwm_temp_handle = PWM_open(params->ML_F_Index,&pwm_params);
         if(pwm_temp_handle){
@@ -207,11 +208,17 @@
     void MotorDriver_Left(MotorDriver_Handle handle, MotorDriver_DutyCycle DutyCycle){
         if(DutyCycle>0){
             PWM_setDuty(handle->ML_F_handle, MotorDriver_PWMOff);
-            PWM_setDuty(handle->ML_R_handle, (int) ( DutyCycle*handle->PWM_fact ));
+            if(DutyCycle < 100)
+                PWM_setDuty(handle->ML_R_handle, (int) ( DutyCycle*handle->PWM_fact ));
+            else
+                PWM_setDuty(handle->ML_R_handle, MotorDriver_PWMSCALAR_100 );
         }else{
             DutyCycle*=-1;
             PWM_setDuty(handle->ML_R_handle, MotorDriver_PWMOff);
-            PWM_setDuty(handle->ML_F_handle, (int) ( DutyCycle*handle->PWM_fact ));
+            if(DutyCycle < 100)
+                PWM_setDuty(handle->ML_F_handle, (int) ( DutyCycle*handle->PWM_fact ));
+            else
+                PWM_setDuty(handle->ML_F_handle, MotorDriver_PWMSCALAR_100 );
         }
     }
 
@@ -220,9 +227,15 @@
         if(DutyCycle<0){
             DutyCycle*=-1;
             PWM_setDuty(handle->MR_F_handle, MotorDriver_PWMOff);
-            PWM_setDuty(handle->MR_R_handle, (int) ( DutyCycle*handle->PWM_fact ));
+            if(DutyCycle < 100)
+                PWM_setDuty(handle->MR_R_handle, (int) ( DutyCycle*handle->PWM_fact ));
+            else
+                PWM_setDuty(handle->MR_R_handle, MotorDriver_PWMSCALAR_100);
         }else{
             PWM_setDuty(handle->MR_R_handle, MotorDriver_PWMOff);
-            PWM_setDuty(handle->MR_F_handle, (int) ( DutyCycle*handle->PWM_fact ));
+            if(DutyCycle < 100)
+                PWM_setDuty(handle->MR_F_handle, (int) ( DutyCycle*handle->PWM_fact ));
+            else
+                PWM_setDuty(handle->MR_F_handle, MotorDriver_PWMSCALAR_100);
         }
     }

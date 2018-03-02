@@ -134,8 +134,11 @@
 
     #define MotorDriver_Base                PWM1_BASE
 
-    #define MotorDriver_PWMPeriod_Default   50
+    #define MotorDriver_PWMPeriod_Default   20000
+
+    #define MotorDriver_PWMSCALAR_100       65535
     #define MotorDriver_PWMOff              0
+
     #define MotorDriver_EN_Off              0
     #define MotorDriver_EN_On               1
     #define MotorDriver_D1_Off              1
