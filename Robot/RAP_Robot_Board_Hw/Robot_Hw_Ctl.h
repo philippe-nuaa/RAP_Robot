@@ -21,6 +21,7 @@
 //
     #define ROBOT_UART  Board_UART0
     //Output Macros
+    #define RobotLogEndl        {UART_putch(Robot_uart , '\n' );}
     #define RobotLog(_MSG_)     {UART_puts(Robot_uart , _MSG_ );}
     #define RobotLogCh(_CHR_)   {UART_putch(Robot_uart , _CHR_ );}
     #define RobotLogInt(_INT_)  {UART_putInt(Robot_uart , _INT_ );}
@@ -28,7 +29,7 @@
     #define RobotLogFloat(_FT_) {UART_putFloat(Robot_uart , _FT_ );}
 
     //Input Macros
-    #define RobotLogReadChar()  UART_readChar(Robot_uart);
+    #define RobotLogReadChar()  UART_readChar(Robot_uart)
     #define RobotLogReadFloat() UART_readFloat(Robot_uart)
 
 

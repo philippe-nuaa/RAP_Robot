@@ -96,6 +96,16 @@ void Robot_EnableIMU(){
         imuConfiguration.Type           = ByteConfiguration;
         IMU_Sensor_Configure(Robot_IMU,&imuConfiguration);
 
+
+        //
+        //  Configurar Filtros para el giroscopio
+        //
+//        imuConfiguration.Address        = IMU_GYRO_CONFIG;
+//        imuConfiguration.Configuration  = 0b00000000;//+/- 16g
+//        imuConfiguration.Type           = ByteConfiguration;
+//        IMU_Sensor_Configure(Robot_IMU,&imuConfiguration);
+
+
         //Limpíar interrupciones en cualquier lectura
         //La interrupicion se genera cuando haya datos listos!
         imuConfiguration.Address        = IMU_INT_PIN_CFG;

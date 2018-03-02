@@ -210,8 +210,8 @@
             PWM_setDuty(handle->ML_R_handle, (int) ( DutyCycle*handle->PWM_fact ));
         }else{
             DutyCycle*=-1;
-            PWM_setDuty(handle->ML_F_handle, (int) ( DutyCycle*handle->PWM_fact ));
             PWM_setDuty(handle->ML_R_handle, MotorDriver_PWMOff);
+            PWM_setDuty(handle->ML_F_handle, (int) ( DutyCycle*handle->PWM_fact ));
         }
     }
 
@@ -222,7 +222,7 @@
             PWM_setDuty(handle->MR_F_handle, MotorDriver_PWMOff);
             PWM_setDuty(handle->MR_R_handle, (int) ( DutyCycle*handle->PWM_fact ));
         }else{
-            PWM_setDuty(handle->MR_F_handle, (int) ( DutyCycle*handle->PWM_fact ));
             PWM_setDuty(handle->MR_R_handle, MotorDriver_PWMOff);
+            PWM_setDuty(handle->MR_F_handle, (int) ( DutyCycle*handle->PWM_fact ));
         }
     }
