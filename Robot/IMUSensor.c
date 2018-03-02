@@ -15,6 +15,9 @@ Semaphore_Handle IMUsemHandle;
 
 IMU_axis    IMU_LastAccel;
 IMU_axis    IMU_Accel;
+
+IMU_axis    IMU_Gyr;
+
 float       Racc;
 float       Roll;
 float       Pitch;
@@ -28,19 +31,14 @@ void IMUInterruptFx(unsigned int Index){
 //
 //Filtro promediador simple
 //
+#define alpha   IMUSmoothFactor
 void Filter(){
     if(IMU_Accel.isValid){
-        IMU_Accel.X_axis += IMU_LastAccel.X_axis;
-        IMU_Accel.Y_axis += IMU_LastAccel.Y_axis;
-        IMU_Accel.Z_axis += IMU_LastAccel.Z_axis;
+        IMU_Accel.X_axis = alpha*IMU_Accel.X_axis + (1-alpha)*IMU_LastAccel.X_axis;
+        IMU_Accel.Y_axis = alpha*IMU_Accel.Y_axis + (1-alpha)*IMU_LastAccel.Y_axis;
+        IMU_Accel.Z_axis = alpha*IMU_Accel.Z_axis + (1-alpha)*IMU_LastAccel.Z_axis;
 
-        IMU_Accel.X_axis /= 2;
-        IMU_Accel.Y_axis /= 2;
-        IMU_Accel.Z_axis /= 2;
-
-        IMU_LastAccel.X_axis = IMU_Accel.X_axis;
-        IMU_LastAccel.Y_axis = IMU_Accel.Y_axis;
-        IMU_LastAccel.Z_axis = IMU_Accel.Z_axis;
+        IMU_LastAccel = IMU_Accel;
     }
 }
 
@@ -50,8 +48,10 @@ IMUTASK_LOOP:
     Semaphore_pend(IMUsemHandle, BIOS_WAIT_FOREVER);
         //Actualizar buffer
         IMU_Accel = IMU_ReadAccelerometer(Robot_IMU);
+        IMU_Gyr   = IMU_ReadGyroscope(Robot_IMU);
+        //Aplicar un filtro pasa bajas
         Filter();
-//Unicamente si son validos los datos actualizamos
+        //Unicamente si son validos los datos actualizamos
         if(IMU_Accel.isValid){
             Racc = powf(powf(IMU_Accel.X_axis,2)+powf(IMU_Accel.Y_axis,2)+powf(IMU_Accel.Z_axis,2),0.5);
             Roll  = acosf(IMU_Accel.Y_axis/Racc);
@@ -87,6 +87,12 @@ void IMUSensor_init(){
     IMU_Accel.Y_axis = 0.0;
     IMU_Accel.Z_axis = 0.0;
     IMU_Accel.isValid = false;
+
+    IMU_Gyr.X_axis = 0.0;
+    IMU_Gyr.Y_axis = 0.0;
+    IMU_Gyr.Z_axis = 0.0;
+    IMU_Gyr.isValid = false;
+
     IMU_LastAccel.X_axis = 0.0;
     IMU_LastAccel.Y_axis = 0.0;
     IMU_LastAccel.Z_axis = 0.0;
@@ -98,6 +104,17 @@ void IMUSensor_Enable(){
 void IMUSensor_Disable(){
     IMU_DisableEvents(Robot_IMU);
 }
+
+rad IMUSensor_getXRotation(void){
+    return IMU_Gyr.X_axis;
+}
+rad IMUSensor_getYRotation(void){
+    return IMU_Gyr.Y_axis;
+}
+rad IMUSensor_getZRotation(void){
+    return IMU_Gyr.Z_axis;
+}
+
 
 rad IMUSensor_getRoll(){
     return Roll;

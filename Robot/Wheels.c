@@ -95,6 +95,27 @@ rad  Left_Wheel_readSpeed(){
 }
 
 
+rad Left_getKp(){
+    return pid_left->Kp;
+}
+rad Left_getKi(){
+    return pid_left->Ki;
+}
+rad Left_getKd(){
+    return pid_left->Kd;
+}
+
+rad Right_getKp(){
+    return pid_right->Kp;
+}
+rad Right_getKi(){
+    return pid_right->Ki;
+}
+rad Right_getKd(){
+    return pid_right->Kd;
+}
+
+
 void Left_setKp(rad p){
     pid_left->Kp = p;
 }

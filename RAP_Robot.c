@@ -2,16 +2,27 @@
 //#include <Robot/IMUSensor.h>
 #include <Robot/Control/Balance.h>
 //#include <Robot/Wheels.h>
+#include  <stdbool.h>
 
 #define TASKSTACKSIZE   512
 
 Task_Struct     task0Struct;
 Char task0Stack[TASKSTACKSIZE];
 
+Task_Struct     task1Struct;
+Char task1Stack[TASKSTACKSIZE];
+
+//Clock_Struct    Clock0Struct;
+//Clock_Handle    Clock0_Handle;
+
 Void Task0(UArg, UArg);
+
+bool flag;
 
 int main(void){
     Task_Params         taskParams;
+
+    flag = false;
 
     Robot_init();
     //
@@ -28,29 +39,90 @@ int main(void){
 }
 
 Void Task0(UArg arg0,UArg arg1){
-//    unsigned char i=0;
+//    float buffer=0.0;
+//    //
+//    //  Wheels Test
+//    //
 //    Wheels_init();
 //    Wheels_start();
-//    Left_Wheel_Speed(2.5);
-//    Right_Wheel_Speed(2.5);
+//    Left_Wheel_Speed(0);
+//    Right_Wheel_Speed(0);
 //
 //TASK0_LOOP:
-//        i++;
-//        RobotLogFloat(Left_Wheel_readSpeed());
-//        RobotLog(" , ");
-//        RobotLogFloat(Right_Wheel_readSpeed());
-//        RobotLogCh('\n');
+//    switch(RobotLogReadChar()){
+//    case 's'://Stop
+//        flag = false;
+//        RobotLog("\nData Configured:\n");
+//        RobotLog("\n\t\tLeft Wheel : P-I-D\n");
+//            RobotLogFloat(Left_getKp());RobotLogEndl;
+//            RobotLogFloat(Left_getKi());RobotLogEndl;
+//            RobotLogFloat(Left_getKd());RobotLogEndl;
+//        RobotLog("\n\t\tRight Wheel : P-I-D\n");
+//            RobotLogFloat(Right_getKp());RobotLogEndl;
+//            RobotLogFloat(Right_getKi());RobotLogEndl;
+//            RobotLogFloat(Right_getKd());RobotLogEndl;
+//        Wheels_stop();
+//        Left_Wheel_Speed(0);
+//        Right_Wheel_Speed(0);
+//        break;
+//    case 'p':
+//        RobotLog("\nCalibrate Proportional : ");
+//        buffer = RobotLogReadFloat();
+//        RobotLog("\n[l]-Left or [r]-Right\n");
+//        if('l'==RobotLogReadChar()){
+//            Left_setKp(buffer);
+//        }else{
+//            Right_setKp(buffer);
+//        }
+//        break;
+//    case 'i':
+//        RobotLog("\nCalibrate Integral : ");
+//        buffer = RobotLogReadFloat();
+//        RobotLog("\n[l]-Left or [r]-Right\n");
+//        if('l'==RobotLogReadChar()){
+//            Left_setKi(buffer);
+//        }else{
+//            Right_setKi(buffer);
+//        }
+//        break;
+//    case 'd':
+//        RobotLog("\nCalibrate Derivative : ");
+//        buffer = RobotLogReadFloat();
+//        RobotLog("\n[l]-Left or [r]-Right\n");
+//        if('l'==RobotLogReadChar()){
+//            Left_setKd(buffer);
+//        }else{
+//            Right_setKd(buffer);
+//        }
+//        break;
+//    case 'r':
+//        RobotLog("\nLeft Speed : ");
+//        Left_Wheel_Speed( RobotLogReadFloat() );
+//        RobotLog("\nRight Speed : ");
+//        Right_Wheel_Speed( RobotLogReadFloat() );
+//        Wheels_start();
+//        flag = true;
+//        break;
+//    default:
+//        RobotLog("Unkown command!\n");
+//    }
+//    RobotLogEndl;
 //    Task_sleep(100);
 //    goto TASK0_LOOP;
 
 
+//    //
+//    //  IMU TEST
+//    //
 //    Robot_EnableIMU();
 //    IMUSensor_init();
 //    IMUSensor_Enable();
 //TASK0_LOOP:
-//        RobotLogHex(IMU_ReadRegister(Robot_IMU,IMU_ACCEL_CONFIG,WordConfiguration));
+//        RobotLogFloat(IMUSensor_getXRotation());
 //        RobotLog(" , ");
-//        RobotLogFloat(IMUSensor_getRoll());
+//        RobotLogFloat(IMUSensor_getYRotation());
+//        RobotLog(" , ");
+//        RobotLogFloat(IMUSensor_getZRotation());
 //        RobotLog("\n");
 //        Task_sleep(100);
 //    goto TASK0_LOOP;
@@ -77,17 +149,12 @@ TASK0_LOOP:
             Balance_stop();
             break;
         case 't':
-            RobotLog("\nBalance Kp : ");
+            RobotLog("\nBalance Acc Kp : ");
                 buffer = RobotLogReadFloat();
-                Balance_setKp(buffer);
-
-            RobotLog("\nBalance Ki : ");
+                Balance_setAccKp(buffer);
+            RobotLog("\nBalance Gyr Kp : ");
                 buffer = RobotLogReadFloat();
-                Balance_setKi(buffer);
-
-            RobotLog("\nBalance Kd : ");
-                buffer = RobotLogReadFloat();
-                Balance_setKd(buffer);
+                Balance_setGyrKp(buffer);
             break;
         default:
             RobotLog("\nComando desconocido!\n");
