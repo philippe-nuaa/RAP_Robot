@@ -1,10 +1,5 @@
 #include <Robot/Robot.h>// Incluye todos los drivers del hardware
 
-//#include <Robot/IMUSensor.h>
-//#include <Robot/Control/Balance.h>
-//#include <Robot/Wheels.h>
-#include  <stdbool.h>
-
 #define TASKSTACKSIZE   512
 
 Task_Struct     task0Struct;
@@ -109,74 +104,78 @@ Void Task0(UArg arg0,UArg arg1){
 //    IMUSensor_init();
 //    IMUSensor_Enable();
 //TASK0_LOOP:
-//        RobotLogFloat(IMUSensor_getXRotation());
+////        RobotLogFloat(IMUSensor_getXRotation());
+////        RobotLog(" , ");
+//
+//        RobotLogFloat( IMUSensor_getRoll() );
 //        RobotLog(" , ");
-//        RobotLogFloat(IMUSensor_getYRotation());
-//        RobotLog(" , ");
-//        RobotLogFloat(IMUSensor_getZRotation());
+//        RobotLogFloat( IMUSensor_getXRotation() );
 //        RobotLog("\n");
 //        Task_sleep(100);
 //    goto TASK0_LOOP;
 
-//    float buffer = 0.0;
-//    char cmd=' ';
-//    Balance_Init();
-//    Balance_calibrate();
-//    Balance_start();
-//TASK0_LOOP:
-//    RobotLog("\nEsperando comando: ");
-//    cmd = RobotLogReadChar();
-//    switch(cmd){
-//        case 'k':
-//            RobotLog("\nCalibrando equilibrio\n");
-//            Balance_calibrate();
-//            break;
-//        case 'g':
-//            RobotLog("\nComenzando control de equilibrio\n");
-//            Balance_start();
-//            break;
-//        case 's':
-//            RobotLog("\nDeteniendo control de equilibrio\n");
-//            Balance_stop();
-//            break;
-//        case 't':
-//            RobotLog("\nBalance Acc Kp : ");
-//                buffer = RobotLogReadFloat();
-//                Balance_setAccKp(buffer);
-//            RobotLog("\nBalance Gyr Kp : ");
-//                buffer = RobotLogReadFloat();
-//                Balance_setGyrKp(buffer);
-//            break;
-//        default:
-//            RobotLog("\nComando desconocido!\n");
-//    }
-//        Task_sleep(100);
-//    goto TASK0_LOOP;
 
-float buffer=0.0;
-char cmd=' ';
-    MotorDriver_Start(Robot_Motor);
+    //  Balance TEST
+    float buffer = 0.0;
+    char cmd=' ';
+    Balance_Init();
+    Balance_calibrate();
+    Balance_start();
 TASK0_LOOP:
     RobotLog("\nEsperando comando: ");
     cmd = RobotLogReadChar();
     switch(cmd){
-        case 's':
-            MotorDriver_Stop(Robot_Motor);
+        case 'k':
+            RobotLog("\nCalibrando equilibrio\n");
+            Balance_calibrate();
             break;
         case 'g':
-            MotorDriver_Start(Robot_Motor);
+            RobotLog("\nComenzando control de equilibrio\n");
+            Balance_start();
+            break;
+        case 's':
+            RobotLog("\nDeteniendo control de equilibrio\n");
+            Balance_stop();
             break;
         case 't':
-            RobotLog("\nLeft Speed : ");
+            RobotLog("\nBalance Acc Kp : ");
                 buffer = RobotLogReadFloat();
-                MotorDriver_Left(Robot_Motor,buffer);
-            RobotLog("\nRight Speed : ");
+                Balance_setAccKp(buffer);
+            RobotLog("\nBalance Gyr Kp : ");
                 buffer = RobotLogReadFloat();
-                MotorDriver_Right(Robot_Motor,buffer);
+                Balance_setGyrKp(buffer);
             break;
         default:
             RobotLog("\nComando desconocido!\n");
     }
-    Task_sleep(100);
+        Task_sleep(100);
     goto TASK0_LOOP;
+
+//float buffer=0.0;
+//char cmd=' ';
+//    RobotLog("\nEncendiendo sistema de motores\n");
+//    MotorDriver_Start(Robot_Motor);
+//TASK0_LOOP:
+//    RobotLog("\nEsperando comando: ");
+//    cmd = RobotLogReadChar();
+//    switch(cmd){
+//        case 's':
+//            MotorDriver_Stop(Robot_Motor);
+//            break;
+//        case 'g':
+//            MotorDriver_Start(Robot_Motor);
+//            break;
+//        case 't':
+//            RobotLog("\nLeft Speed : ");
+//                buffer = RobotLogReadFloat();
+//                MotorDriver_Left(Robot_Motor,buffer);
+//            RobotLog("\nRight Speed : ");
+//                buffer = RobotLogReadFloat();
+//                MotorDriver_Right(Robot_Motor,buffer);
+//            break;
+//        default:
+//            RobotLog("\nComando desconocido!\n");
+//    }
+//    Task_sleep(100);
+//    goto TASK0_LOOP;
 }

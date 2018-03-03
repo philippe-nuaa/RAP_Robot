@@ -28,6 +28,9 @@ void IMUInterruptFx(unsigned int Index){
     Semaphore_post(IMUsemHandle);
 }
 
+#define Significant     100
+#define OffSet          0.06
+
 //
 //Filtro promediador simple
 //
@@ -39,6 +42,9 @@ void Filter(){
         IMU_Accel.Z_axis = alpha*IMU_Accel.Z_axis + (1-alpha)*IMU_LastAccel.Z_axis;
 
         IMU_LastAccel = IMU_Accel;
+    }
+    if(IMU_Gyr.isValid){
+        IMU_Gyr.X_axis = (float)((int)(IMU_Gyr.X_axis*Significant))/Significant;
     }
 }
 
@@ -54,7 +60,16 @@ IMUTASK_LOOP:
         //Unicamente si son validos los datos actualizamos
         if(IMU_Accel.isValid){
             Racc = powf(powf(IMU_Accel.X_axis,2)+powf(IMU_Accel.Y_axis,2)+powf(IMU_Accel.Z_axis,2),0.5);
-            Roll  = acosf(IMU_Accel.Y_axis/Racc);
+            Roll  = (atan2f(IMU_Accel.Z_axis,IMU_Accel.Y_axis))-OffSet;//acosf(IMU_Accel.Y_axis/Racc);
+                Roll = (float)((int)(Significant*Roll))/Significant;
+
+            //Off set for 0 rads calibration
+            Roll -= 1.5;
+            if(Roll < -3.14){
+                Roll += 6.14;
+            }
+            //Off set for 0 rads calibration
+
             Pitch = acosf(IMU_Accel.X_axis/Racc);
             Yaw   = acosf(IMU_Accel.Z_axis/Racc);
         }

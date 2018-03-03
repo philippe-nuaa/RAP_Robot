@@ -11,6 +11,9 @@
 #ifndef _PID_DATA_TYPE_
     #define _PID_DATA_TYPE_ volatile Encoder_vel
 #endif
+
 #include "PID.h"
+#include "Balance.h"
+
 
 #endif /* UTILS_CONTROL_CONTROL_H_ */

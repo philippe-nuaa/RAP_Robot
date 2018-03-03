@@ -16,7 +16,7 @@ BIOS_INC  = -I"/home/josepablocb/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_0
 
 TARGET_INC = -I"/home/josepablocb/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/"
 
-INCS = $(BIOS_INC) $(TARGET_INC)  --include_path="/home/josepablocb/Documentos/VoltaRobotics/Proyectos/RAP/Git/RAP_Robot" --include_path="/home/josepablocb/Documentos/VoltaRobotics/Proyectos/RAP/Git/RAP_Robot" --include_path="/home/josepablocb/ti/tirtos_tivac_2_16_00_08/products/TivaWare_C_Series-2.1.1.71b" --include_path="/home/josepablocb/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/posix" --include_path="/home/josepablocb/ti/ccsv7/tools/compiler/ti-cgt-arm_18.1.0.LTS/include" 
+INCS = $(BIOS_INC) $(TARGET_INC)  --include_path="/home/josepablocb/Workspace/VoltaRobotics/Tests/RAP_Robot" --include_path="/home/josepablocb/Workspace/VoltaRobotics/Tests/RAP_Robot" --include_path="/home/josepablocb/ti/tirtos_tivac_2_16_00_08/products/TivaWare_C_Series-2.1.1.71b" --include_path="/home/josepablocb/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/posix" --include_path="/home/josepablocb/ti/ccsv7/tools/compiler/ti-cgt-arm_18.1.0.LTS/include" 
 
 CC = /home/josepablocb/ti/ccsv7/tools/compiler/ti-cgt-arm_18.1.0.LTS/bin/armcl -c $(CCOPTS) -I /home/josepablocb/ti/ccsv7/tools/compiler/ti-cgt-arm_18.1.0.LTS/include
 ASM = /home/josepablocb/ti/ccsv7/tools/compiler/ti-cgt-arm_18.1.0.LTS/bin/armcl -c $(CCOPTS) -I /home/josepablocb/ti/ccsv7/tools/compiler/ti-cgt-arm_18.1.0.LTS/include
